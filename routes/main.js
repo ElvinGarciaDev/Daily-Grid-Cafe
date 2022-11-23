@@ -15,4 +15,7 @@ router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 
+// A cashier can submit an order from the / root. No need to login, only baristas can login
+router.post("/", postsController.createPost)
+
 module.exports = router;

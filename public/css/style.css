@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Clear fix hack */
+  .clearfix:after {
+       content: ".";
+       display: block;
+       clear: both;
+       visibility: hidden;
+       line-height: 0;
+       height: 0;
+  }
+  
+  .clear {
+      clear: both;
+  }
+
+.mainConatiner {
+    color: white;
+    text-align: center;
+    width: 70%;
+    margin: 2rem auto;
+    background: rgba(14, 12, 11, .9);
+    padding-top: 2rem;
+}
+
+.icedDrinks, .hotDrinks{
+
+    margin: 1em auto;
+    font-size: 2em;
+    width: 50%;
+    border: .5px yellow solid;
+
+
+}
+
+#btn {
+    margin-bottom: 2rem;
+}

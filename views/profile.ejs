@@ -1,46 +1,83 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">                 <%# (Here you'll be making a get request and pass in the indevidual post id) %>	
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+
+<a href="/logout"  class="col-3 btn btn-primary" id="logoutBTN">Log out</a>
+
+<section class="mainSection">
+  <div>
+    <div class="textColor">
+      <h1>Pending Orders</h1>
+      <p>Click the checkmark once an order is complete</p>
     </div>
+
+    <% if(pendingOrders.length == 0) {%>
+      <p class="textColor">No orders pending. Feel free to take a break!</p>
+    <%} %>
+
+    <ul>
+    <% for (let i = 0; i < pendingOrders.length; i++) {%>
+      <div class="OrderPending">
+        <li>
+          <span>Name: <%= pendingOrders[i].customerName%></span>
+          <p>Order: <%= pendingOrders[i].size%> <%= pendingOrders[i].order%></p>
+          <!-- <span><i class="bi bi-check-circle"></i></span> -->
+
+          <!--Using method override to send a put request to the server. When somone clicks on the checkmark it tells the server to change order from pending to complete-->
+          <form
+            class="col-1"
+            action="/post/completeOrder/<%= pendingOrders[i].id %>?_method=PUT"
+            method="POST"
+            >
+            <button class="btn btn-primary bi bi-check-circle" type="submit"></button>
+          </form>
+
+        </li>
+      </div>
+    <%}%>
+    </ul>
+
+
+
   </div>
-</div>
+</section>
+
+
+<section class="mainSection">
+  <div >
+    <div class="textColor">
+      <h1>Waiting For Pickup</h1>
+      <p>Delete an order once it's been picked up</p>
+
+    </div>
+    <ul>
+    <% for (let i = 0; i < completedOrders.length; i++) {%>
+      <div class="OrderComplete">
+        <li>
+          <span><%= completedOrders[i].barista%> completed: <%= completedOrders[i].customerName%>'s order</span>
+          <p>Order: <%= completedOrders[i].size%> <%= completedOrders[i].order%></p>
+
+
+          <!--Using method override to send a delete request to the server. When somone clicks on the trash icon it tells the server to delete the order from the database-->
+
+          <!--Pass in the ID of the post as a query parameter so we know which post to delete-->
+          <form
+          action="/post/deleteOrder/<%= completedOrders[i].id %>?_method=DELETE" 
+          method="POST"
+          class="col-3"
+        >
+          <button class="btn btn-primary bi bi-trash" type="submit"></button>
+        </form>
+          
+        </li>
+      </div>
+    <%}%>
+    </ul>
+
+
+
+  </div>
+</section>
+
+
+
+<script src="/js/main.js"></script>
 <%- include('partials/footer') -%>

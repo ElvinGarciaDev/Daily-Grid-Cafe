@@ -1,34 +1,31 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  title: {
+
+  order: {
     type: String,
     required: true,
   },
-  image: {
-    type: String,  // we dont want to store media in our databse. Cloaudanery stores the image on their server and give us a url
-    require: true,
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
-  caption: {
+  size: {
     type: String,
     required: true,
   },
-  likes: {
-    type: Number,
+  orderStatus: { // Property allows us to know when an order is waiting to be completed. A put request is sent to the server when completed button is clicked.
+    type: String,
+    required: true,
+    default: 'pending'
+  },
+  customerName: { // Make sure every order has a customers name on it. It will make is easier when it comes time to display orders in ejs
+    type: String,
     required: true,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId, // This is how we tie a post to a specific user
-    ref: "User",
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  barista: { // This property will help us keep trash of which barista completes an order. It's determined on who is currenly logged in when the complete order PUT request is sent to the server
+    type: String,
+    required: true,
+    default: " " // When a new order is created, set the barista name to empty string. The name will update when a barista completes an order
+  }
+
+  
 });
 
-module.exports = mongoose.model("Post", PostSchema); // "Post" is the collection name. It takes POST and makes it plural. You can also add a third parameter and call the database whatever you want
+module.exports = mongoose.model("orders", PostSchema); // "orders" is the collection name. It takes orders and makes it plural. You can also add a third parameter and call the database whatever you want

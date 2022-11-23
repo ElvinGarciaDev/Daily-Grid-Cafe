@@ -1,11 +1,80 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
-</main>
+    <main class="container">
+        <div class="row justify-content-around mt-5">
+            <a href="/login" class="col-3 btn btn-primary"> Login</a>
+            <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
+        </div>
+    </main>
+
+    <section class="mainConatiner clearfix">
+        <div>
+            <h1>Daily Grind Cafe <i class="fa-sharp fa-solid fa-mug-hot"></i></h1>
+        </div>
+
+
+    <div class="drinkConatiner">
+        <form action="/" method="POST">
+            <input class="clearfix" type="text" name="customerName" placeholder="Customer Name">
+
+
+
+            <div class="icedDrinks">
+                <p> Iced Drinks </p>
+
+                <label for="small">Small $3.99 </label>
+                <input  type="radio" name = "size" value="Small" id="small">
+
+                <label for="large">Large $4.89 </label>
+                <input  type="radio" name = "size" value="Large" id="large">
+
+
+                <br>
+                <label for="IcedLatte">Iced Latte</label>
+                <input type="radio" name = "type" value="Iced Latte" id="IcedLatte"> 
+
+                <br>
+
+                <label for="IcedCappuccino">Iced Cappuccino</label>
+                <input type="radio" name = "type" value="Iced Cappuccino" id="IcedCappuccino"> 
+
+                <br>
+                <label for="IcedAmericano">Iced Americano</label>
+                <input type="radio" name = "type" value="Iced Americano" id="IcedAmericano">
+            </div>
+
+            <div class="hotDrinks">
+                <p> Hot Drinks </p>
+
+                <label for="small">Small $3.99 </label>
+                <input  type="radio" name = "size" value="Small" id="small">
+
+                <label for="large">Large $4.89 </label>
+                <input  type="radio" name = "size" value="Large" id="large">
+
+                <br>
+
+                <label for="HotChoclate">Hot Choclate </label>
+                <input type="radio" name = "type" value="Hot Choclate" id="HotChoclate">
+
+                <br>
+
+                <label for="Expresso">Expresso</label>
+                <input type="radio" name = "type" value="Expresso" id="Expresso">
+
+                <br>
+
+                <label for="Cappuccino">Cappuccino</label>
+                <input type="radio" name = "type" value="Cappuccino" id="Cappuccino">
+            </div>
+        <button class="col-3 btn btn-primary" type="submit" id="btn">Submit order</button>
+
+
+    </form>
+</div>
+
+
+    </section>
     
 
 <%- include('partials/footer') -%>

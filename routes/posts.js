@@ -12,8 +12,11 @@ router.get("/:id", ensureAuth, postsController.getPost); //You can grab the quer
 
 router.post("/createPost", upload.single("file"), postsController.createPost);
 
-router.put("/likePost/:id", postsController.likePost);
+// When a barista marks an order complete, go to the post controller and run the completeOrder method
+router.put("/completeOrder/:id", postsController.completeOrder);
 
-router.delete("/deletePost/:id", postsController.deletePost);
+// When a order has been complete it will be displayed on the completed section and have a trash can icon. Baristas can delete an order
+router.delete("/deleteOrder/:id", postsController.deleteOrder);
+
 
 module.exports = router;

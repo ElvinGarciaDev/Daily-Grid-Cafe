@@ -1,22 +1,35 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
-const Comment = require("../models/Comment")
+
 
 
 // We are exporting an object and all these are async methods.
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id }); // Only see logged in users photos
-      res.render("profile.ejs", { posts: posts, user: req.user });
+
+      // Find all the pending order. Orders that have not been completed
+      const pendingOrders = await Post.find({orderStatus: "pending"});
+
+      // Find all the completed orders
+      const completedOrders = await Post.find({orderStatus: "complete"})      
+      
+      // Send the pending and completed orders to the ejs so we can dynamically create html elements
+      res.render("profile.ejs", { pendingOrders: pendingOrders, completedOrders: completedOrders });
+
     } catch (err) {
       console.log(err);
     }
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      
+      // Find all the pending order. Orders that have not been completed
+      const pendingOrders = await Post.find({orderStatus: "pending"});
+
+
+
+      res.render("feed.ejs", { pendingOrders: pendingOrders });
     } catch (err) {
       console.log(err);
     }
@@ -39,48 +52,51 @@ module.exports = {
     }
   },
   createPost: async (req, res) => {
+
+    console.log(req.body)
+
     try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
 
       // Use the Post schema to create a document and save it to mongoDB
       await Post.create({
-        title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        caption: req.body.caption,
-        likes: 0,
-        user: req.user.id,
+
+        order: req.body.type,
+        size: req.body.size,
+        customerName: req.body.customerName
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.redirect("/");
     } catch (err) {
       console.log(err);
     }
+
+
   },
-  likePost: async (req, res) => {
+
+  completeOrder: async (req, res) => {
+    console.log(req.user)
+
+    // Go to the orders collection find an id that matches the one sent via query parameter and update orderStatus from pending to complete
     try {
       await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
-          $inc: { likes: 1 },
+          orderStatus:  "complete" ,
+          barista: req.user.userName // When a barista marks the order as complete. Take their name and attach it to that order. That way we can keep track of who is completing orders and display it
         }
       );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      speechSynthesis('Hello World', 'en-IN');
+
+      res.redirect(`/profile`);
     } catch (err) {
       console.log(err);
     }
   },
-  deletePost: async (req, res) => {
+  deleteOrder: async (req, res) => {
     try {
-      // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
-      // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId); // This deletes it from cloudinary becuase we no longer need it
+
       // Delete post from db
       await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
       res.redirect("/profile");
     } catch (err) {
       res.redirect("/profile");
