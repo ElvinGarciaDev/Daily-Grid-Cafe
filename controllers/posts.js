@@ -1,4 +1,3 @@
-const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
 
@@ -21,19 +20,7 @@ module.exports = {
       console.log(err);
     }
   },
-  getFeed: async (req, res) => {
-    try {
-      
-      // Find all the pending order. Orders that have not been completed
-      const pendingOrders = await Post.find({orderStatus: "pending"});
 
-
-
-      res.render("feed.ejs", { pendingOrders: pendingOrders });
-    } catch (err) {
-      console.log(err);
-    }
-  },
   getPost: async (req, res) => {
     try {
       // Post is the schema for a gernal post
@@ -102,27 +89,5 @@ module.exports = {
       res.redirect("/profile");
     }
   },
-
-
-  // Create comment
-  // createComment: async (req, res) => {
-  //   try {
-
-  //     console.log(req.body)
-
-
-  //     // Use the Post schema to create a document and save it to mongoDB
-  //     await Comment.create({
-  //       text: req.body.text,
-  //       likes: 0,
-  //       user: req.user.id,
-  //       postId: req.params.id
-  //     });
-  //     console.log("Post has been added!");
-  //     res.redirect(`/post/${req.params.id}`); // Redirect back to the same post
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
 
 };

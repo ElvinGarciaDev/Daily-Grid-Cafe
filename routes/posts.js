@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../middleware/multer");
 const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
@@ -10,7 +9,7 @@ router.get("/:id", ensureAuth, postsController.getPost); //You can grab the quer
 // the route is example: http://localhost:8000/post/637531bdb674a3719be5932d . When you click to go to a post directly it sends a get request because
 // it's in a <a> tag
 
-router.post("/createPost", upload.single("file"), postsController.createPost);
+router.post("/createPost", postsController.createPost);
 
 // When a barista marks an order complete, go to the post controller and run the completeOrder method
 router.put("/completeOrder/:id", postsController.completeOrder);
