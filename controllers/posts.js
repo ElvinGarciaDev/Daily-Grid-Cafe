@@ -72,8 +72,6 @@ module.exports = {
           barista: req.user.userName // When a barista marks the order as complete. Take their name and attach it to that order. That way we can keep track of who is completing orders and display it
         }
       );
-      speechSynthesis('Hello World', 'en-IN');
-
       res.redirect(`/profile`);
     } catch (err) {
       console.log(err);
