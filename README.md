@@ -1,4 +1,4 @@
-# Think-Cafe
+# Daily-Grind-Cafe
 
 <img width="900" alt="Screen Shot 2022-11-23 at 1 04 41 AM" src="https://user-images.githubusercontent.com/91163017/203481776-86eafd87-5361-48c0-bd35-6cb8c7b49967.png">
 
