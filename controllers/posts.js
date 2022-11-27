@@ -1,7 +1,6 @@
 const Post = require("../models/Post");
 
 
-
 // We are exporting an object and all these are async methods.
 module.exports = {
   getProfile: async (req, res) => {
@@ -11,7 +10,9 @@ module.exports = {
       const pendingOrders = await Post.find({orderStatus: "pending"});
 
       // Find all the completed orders
-      const completedOrders = await Post.find({orderStatus: "complete"})      
+      const completedOrders = await Post.find({orderStatus: "complete"})
+      
+      console.log(pendingOrders, completedOrders)
       
       // Send the pending and completed orders to the ejs so we can dynamically create html elements
       res.render("profile.ejs", { pendingOrders: pendingOrders, completedOrders: completedOrders });
