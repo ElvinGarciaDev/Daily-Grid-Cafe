@@ -17,7 +17,7 @@
     <% for (let i = 0; i < pendingOrders.length; i++) {%>
       <div class="OrderPending">
         <li>
-          <span>Name: <%= pendingOrders[i].customerName%></span>
+          <span id="customerName">Name: <%= pendingOrders[i].customerName%></span>
           <p>Order: <%= pendingOrders[i].size%> <%= pendingOrders[i].order%></p>
           <!-- <span><i class="bi bi-check-circle"></i></span> -->
 
@@ -79,4 +79,5 @@
 
 
 
+<script src="/main.js"></script>
 <%- include('partials/footer') -%>
