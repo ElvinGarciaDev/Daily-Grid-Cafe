@@ -1,40 +1,55 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-  <div class="row justify-content-center">
-    <section class="col-6 mt-5">
-      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-      <div class="alert alert-danger"><%= el.msg %></div>
-      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-      messages.info.forEach( el => { %>
-      <div class="alert alert-info"><%= el.msg %></div>
-      <% }) %> <% } %>
-      <form action="/login" method="POST">
-        <div class="mb-3">
-          <label style="color: white;" for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
+
+<div class="vh-100 d-flex justify-content-center align-items-center">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card bg-white">
+          <div class="card-body p-5">
+            <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+              <div class="alert alert-danger"><%= el.msg %></div>
+              <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+              messages.info.forEach( el => { %>
+              <div class="alert alert-info"><%= el.msg %></div>
+              <% }) %> <% } %>
+            <form class="mb-3 mt-md-4" action="/login" method="POST">
+              <h2 class="fw-bold mb-2 text-uppercase ">Daily Grind Cafe</h2>
+              <p class=" mb-5">Please enter your login and password!</p>
+              <div class="mb-3">
+                <label for="email" class="form-label ">Email address</label>
+                <input
             type="email"
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             name="email"
           />
-        </div>
-        <div class="mb-3">
-          <label style="color: white;" for="exampleInputPassword1" class="form-label">Password</label>
-          <input
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label ">Password</label>
+                <input
             type="password"
             class="form-control"
             id="exampleInputPassword1"
             name="password"
           />
+              </div>
+              <p class="small"><a class="text-primary" href="forget-password.html">Forgot password?</a></p>
+              <div class="d-grid">
+                <button class="btn btn-outline-dark" type="submit">Login</button>
+              </div>
+            </form>
+            <div>
+              <p class="mb-0  text-center">Don't have an account? <a href="/signup" class="text-primary fw-bold">Sign
+                  Up</a></p>
+            </div>
+
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </section>
+      </div>
+    </div>
   </div>
-</main>
+</div>
 
 <%- include('partials/footer') -%>
