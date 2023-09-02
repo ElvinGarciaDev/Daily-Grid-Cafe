@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
 
   order: {
-    type: String,
+    type: Array,
     required: true,
   },
   size: {
@@ -19,7 +19,7 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  barista: { // This property will help us keep trash of which barista completes an order. It's determined on who is currenly logged in when the complete order PUT request is sent to the server
+  barista: { // This property will help us keep track of which barista completes an order. It's determined on who is currenly logged in when the complete order PUT request is sent to the server
     type: String,
     required: true,
     default: " " // When a new order is created, set the barista name to empty string. The name will update when a barista completes an order

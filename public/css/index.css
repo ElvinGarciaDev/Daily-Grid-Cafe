@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+  }
+
+  
+  /* Clear fix hack */
+  .clearfix:after {
+       content: ".";
+       display: block;
+       clear: both;
+       visibility: hidden;
+       line-height: 0;
+       height: 0;
+  }
+  
+  /* .clear {
+      clear: both;
+  }
+
+.mainConatiner {
+    color: white;
+    text-align: center;
+    width: 70%;
+    margin: 2rem auto;
+    background: rgba(14, 12, 11, .9);
+    padding-top: 2rem;
+}
+
+.icedDrinks, .hotDrinks{
+
+    margin: 1em auto;
+    font-size: 2em;
+    width: 50%;
+    border: .5px yellow solid;
+
+
+}
+
+#btn {
+    margin-bottom: 2rem;
+} */
+
+
+header, .navbar {
+    height: 100px;
+}
+.navbar-nav {
+    margin-left: 10rem;
+}
+
+.bi {
+    font-size: 1.7rem;
+
+}
+
+.buttonSec {
+    margin-right: 10rem;
+}
+
+.buttonSec a {
+    text-decoration: none;
+}
+
+
+.brandName {
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.drinkConatiner {
+    /* border: 1px solid red; */
+    width: 30rem;
+    margin: 2rem auto;
+    font-size: 1.3rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    padding-bottom: 2rem;
+
+}
+
+.clientName * {
+    display: block;
+}
+.clientName label {
+    padding-left: 2rem;
+    padding-top: 1rem;
+}
+
+.clientName input {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    margin-left: 2.5rem;
+    /* border: 1px solid black; */
+    width: 80%;
+    padding: .8rem;
+    margin-top: 1rem;
+
+}
+
+legend, .selectDrink {
+    padding-left: 2rem;
+    padding-top: 1rem;
+}
+
+.option {
+    margin-left: 2.5rem;
+    padding-top: .5rem;
+
+}
+select {
+
+    margin-left: 2.5rem;
+    display: block;
+    width: 80%;
+    border-radius: .5rem;
+}
+
+#btn {
+    margin-top: 2rem;
+    margin-left: 62%;
+}

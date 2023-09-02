@@ -1,80 +1,254 @@
 <%- include('partials/header') -%>
 
-    <main class="container">
-        <div class="row justify-content-around mt-5">
-            <a href="/login" class="col-3 btn btn-primary"> Login</a>
-            <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-        </div>
-    </main>
+<link rel="stylesheet" href="/css/index.css" />
 
-    <section class="mainConatiner clearfix">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          <!-- <a class="navbar-brand" href="#"><i class="bi bi-twitter"></i></a> -->
+      
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="navbar-brand" href="#"><i class="bi bi-twitter"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" href="#"><i class="bi bi-facebook"></i></a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="navbar-brand" href="#"> <i class="bi bi-github"></i></a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="navbar-brand" href="#"> <i class="bi bi-linkedin"></i></a>
+              </li>
+            </ul>
+      
+            <div class="buttonSec">
+              <button class="btn btn-outline-success me-2" type="button">
+                  <a href="/login"> Log In</a>
+                </button>
+                <button class="btn btn-outline-success me-2" type="button">
+                  <a href="/signup">Sign Up</a>
+                </button>
+            </div>
+      
+          </div>
+        </div>
+      </nav>
+</header>
+
+
+<section class="mainConatiner clearfix">
+  <div class="brandName">
+    <h1>Daily Grind Cafe <i class="fa-sharp fa-solid fa-mug-hot"></i></h1>
+  </div>
+
+  <div class="drinkConatiner">
+    <form action="/" method="POST">
+
+        <div class="clientName">
+            <label for="customerName">Customer name?</label>
+            <input
+              class="clearfix"
+              type="text"
+              name="customerName"
+              placeholder="Enter customer Name"
+            />
+        </div>
+
+        <div class="drinkSize">
+            <fieldset>
+                <legend>Drink Size</legend>
+        
+                <div >
+                  <div class="option">
+                    <input type="radio" name="size" value="Small" id="small" />
+                    <label for="small">Small $2.95 </label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="size" value="Medium" id="medium" />
+                    <label for="small">Medium $3.65 </label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="size" value="Large" id="large" />
+                    <label for="large">Large $4.15 </label>
+                  </div>
+                  <!-- <div >
+                    <input name="size" value="L" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="size" class="ml-3 block text-sm font-medium text-gray-700">Large</label>
+                  </div>
+                  <div >
+                    <input name="size" value="XL" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="size" class="ml-3 block text-sm font-medium text-gray-700">X-Large</label>
+                  </div>
+                </div> -->
+              </fieldset>
+        </div>
+
         <div>
-            <h1>Daily Grind Cafe <i class="fa-sharp fa-solid fa-mug-hot"></i></h1>
-        </div>
+            <label for="drink" class="selectDrink">Select a Drink(s)</label>
+            <select name="drink" id="cold" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+              <option value="">Cold Drinks</option>
+              <option value="Iced Latte">Iced Latte</option>
+              <option value="Iced Cappuccino">Iced Cappuccino</option>
+              <option value="Iced Americano">Iced Americano</option>
+            </select>
+            <select name="drink" id="hot" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+              <option value="">Hot Drinks</option>
+              <option value="Hot Chocolate">Hot Chocolate</option>
+              <option value="Expresso">Expresso</option>
+              <option value="Cappuccino">Cappuccino</option>
+            </select>
 
+          </div>
 
-    <div class="drinkConatiner">
-        <form action="/" method="POST">
-            <input class="clearfix" type="text" name="customerName" placeholder="Customer Name">
+          <button class="btn btn-primary" type="submit" id="btn">
+            Submit order
+          </button>
 
+      <!-- <div class="icedDrinks">
+        <p>Iced Drinks</p>
 
+        <label for="small">Small $3.99 </label>
+        <input type="radio" name="size" value="Small" id="small" />
 
-            <div class="icedDrinks">
-                <p> Iced Drinks </p>
+        <label for="large">Large $4.89 </label>
+        <input type="radio" name="size" value="Large" id="large" />
 
-                <label for="small">Small $3.99 </label>
-                <input  type="radio" name = "size" value="Small" id="small">
+        <br />
+        <label for="IcedLatte">Iced Latte</label>
+        <input type="radio" name="type" value="Iced Latte" id="IcedLatte" />
 
-                <label for="large">Large $4.89 </label>
-                <input  type="radio" name = "size" value="Large" id="large">
+        <br />
 
+        <label for="IcedCappuccino">Iced Cappuccino</label>
+        <input
+          type="radio"
+          name="type"
+          value="Iced Cappuccino"
+          id="IcedCappuccino"
+        />
 
-                <br>
-                <label for="IcedLatte">Iced Latte</label>
-                <input type="radio" name = "type" value="Iced Latte" id="IcedLatte"> 
+        <br />
+        <label for="IcedAmericano">Iced Americano</label>
+        <input
+          type="radio"
+          name="type"
+          value="Iced Americano"
+          id="IcedAmericano"
+        />
+      </div>
 
-                <br>
+      <div class="hotDrinks">
+        <p>Hot Drinks</p>
 
-                <label for="IcedCappuccino">Iced Cappuccino</label>
-                <input type="radio" name = "type" value="Iced Cappuccino" id="IcedCappuccino"> 
+        <label for="small">Small $3.99 </label>
+        <input type="radio" name="size" value="Small" id="small" />
 
-                <br>
-                <label for="IcedAmericano">Iced Americano</label>
-                <input type="radio" name = "type" value="Iced Americano" id="IcedAmericano">
-            </div>
+        <label for="large">Large $4.89 </label>
+        <input type="radio" name="size" value="Large" id="large" />
 
-            <div class="hotDrinks">
-                <p> Hot Drinks </p>
+        <br />
 
-                <label for="small">Small $3.99 </label>
-                <input  type="radio" name = "size" value="Small" id="small">
+        <label for="HotChoclate">Hot Chocolate </label>
+        <input type="radio" name="type" value="Hot Choclate" id="HotChoclate" />
 
-                <label for="large">Large $4.89 </label>
-                <input  type="radio" name = "size" value="Large" id="large">
+        <br />
 
-                <br>
+        <label for="Expresso">Expresso</label>
+        <input type="radio" name="type" value="Expresso" id="Expresso" />
 
-                <label for="HotChoclate">Hot Chocolate </label>
-                <input type="radio" name = "type" value="Hot Choclate" id="HotChoclate">
+        <br />
 
-                <br>
-
-                <label for="Expresso">Expresso</label>
-                <input type="radio" name = "type" value="Expresso" id="Expresso">
-
-                <br>
-
-                <label for="Cappuccino">Cappuccino</label>
-                <input type="radio" name = "type" value="Cappuccino" id="Cappuccino">
-            </div>
-        <button class="col-3 btn btn-primary" type="submit" id="btn">Submit order</button>
-
-
+        <label for="Cappuccino">Cappuccino</label>
+        <input type="radio" name="type" value="Cappuccino" id="Cappuccino" />
+      </div>
+      <button class="col-3 btn btn-primary" type="submit" id="btn">
+        Submit order
+      </button> -->
     </form>
-</div>
+  </div>
+</section>
 
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div class=" my-5">
 
-    </section>
+    <footer class="bg-light text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a
+          class="btn btn-primary btn-floating m-1"
+          style="background-color: #3b5998;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+  
+        <!-- Twitter -->
+        <a
+          class="btn btn-primary btn-floating m-1"
+          style="background-color: #55acee;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-twitter"></i
+        ></a>
+  
+        <!-- Google -->
+        <a
+          class="btn btn-primary btn-floating m-1"
+          style="background-color: #dd4b39;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-google"></i
+        ></a>
+  
+        <!-- Instagram -->
+        <a
+          class="btn btn-primary btn-floating m-1"
+          style="background-color: #ac2bac;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-instagram"></i
+        ></a>
+  
+        <!-- Linkedin -->
+        <a
+          class="btn btn-primary btn-floating m-1"
+          style="background-color: #0082ca;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+        <!-- Github -->
+        <a
+          class="btn btn-primary btn-floating m-1"
+          style="background-color: #333333;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © Elvin Garcia. All rights reserved.
+      <a target="_blank" class="text-white" href="https://elvingarcia.dev">elvingarcia.dev</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
     
+  </div>
+  <!-- End of .container -->
 
 <%- include('partials/footer') -%>

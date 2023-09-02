@@ -1,62 +1,140 @@
 <%- include('partials/header') -%>
 
-<a href="/logout"  class="col-3 btn btn-primary" id="logoutBTN">Log out</a>
+  <!--NAV BAR-->
 
-<section class="mainSection">
-  <div>
-    <div class="textColor">
-      <h1>Pending Orders</h1>
-      <p>Click the checkmark once an order is complete</p>
+  <nav class="navbar navbar-light bg-light navbar-expand-lg">
+    <div class="container">
+      <a href="/" class="navbar-brand">Welcome back, <%= user.userName%></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a  class="btn btn-outline-success my-2 my-sm-0" href="logout" class="nav-link">Logout</a>
+                </li>
+                <li class="nav-item">
+                  <a style="margin: 10px;"  class="btn btn-success my-2 my-sm-0" href="/" class="nav-link">Take Order</a>
+              </li>
+
+            </ul>
+        </div>
     </div>
+</nav>
 
-    <% if(pendingOrders.length == 0) {%>
-      <p class="textColor">No orders pending. Feel free to take a break!</p>
-    <%} %>
 
-    <ul>
-    <% for (let i = 0; i < pendingOrders.length; i++) {%>
-      <div class="OrderPending">
-        <li>
-          <span id="customerName">Name: <%= pendingOrders[i].customerName%></span>
-          <p>Order: <%= pendingOrders[i].size%> <%= pendingOrders[i].order%></p>
-          <!-- <span><i class="bi bi-check-circle"></i></span> -->
+ <!--If there is now order, give the barista a break and don't show the orders section-->
 
-          <!--Using method override to send a put request to the server. When somone clicks on the checkmark it tells the server to change order from pending to complete-->
+<% if(pendingOrders.length == 0 && completedOrders.length == 0){ %>
+  <p class="textColor text-center mt-5 h3">No orders pending. Feel free to take a break!</p>
+<% } else{ %>  
+ <!--Pending orders-->
+
+ <section class="h-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card" style="border-radius: 10px;">
+          <div class="card-header px-4 py-5">
+            <h5 class="text-muted mb-0">Pending Orders</h5>
+          </div>
+          <div class="card-body p-4">
+            <!-- <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
+              <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
+            </div> -->
+            <% for (let i = 0; i < pendingOrders.length; i++) {%>
+            <div class="card shadow-0 border mb-4">
+              <div class="card-body">
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <img src="https://i.etsystatic.com/37674354/r/il/f56abf/4307629411/il_1588xN.4307629411_dpli.jpg"
+                      class="img-fluid" alt="Phone" style="width: 3.5rem"> 
+                      
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p id="customerName" class="text-muted mb-0">Customer: <%= pendingOrders[i].customerName%> </p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Size: <br /> <%= pendingOrders[i].size%></p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center" id="order" style="width: 10rem">
+                    <p class="text-muted mb-0 small">Order: <br /> <%= pendingOrders[i].order%> </p>
+
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center" id="order" >
+
+                    <!--Using method override to send a put request to the server. When somone clicks on the checkmark it tells the server to change order from pending to complete-->
           <form
-            class="col-1"
-            action="/post/completeOrder/<%= pendingOrders[i].id %>?_method=PUT"
-            method="POST"
-            >
-            <button class="btn btn-primary bi bi-check-circle" type="submit"></button>
-          </form>
+          class="col-1"
+          action="/post/completeOrder/<%= pendingOrders[i].id %>?_method=PUT"
+          method="POST"
+          >
+          <button class="btn btn-success bi bi-check-circle" type="submit"></button>
+        </button>
+        </form>
 
-        </li>
+
+                  </div>
+                 
+                </div>
+
+
+
+              </div>
+            </div>
+            <%}%>
+
+            
+          </div>
+
+        </div>
       </div>
-    <%}%>
-    </ul>
-
-
-
+    </div>
   </div>
 </section>
 
 
-<section class="mainSection">
-  <div >
-    <div class="textColor">
-      <h1>Waiting For Pickup</h1>
-      <p>Delete an order once it's been picked up</p>
+ <!--Complete orders-->
 
-    </div>
-    <ul>
-    <% for (let i = 0; i < completedOrders.length; i++) {%>
-      <div class="OrderComplete">
-        <li>
-          <span><%= completedOrders[i].barista%> completed: <%= completedOrders[i].customerName%>'s order</span>
-          <p>Order: <%= completedOrders[i].size%> <%= completedOrders[i].order%></p>
+ <section class="h-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card" style="border-radius: 10px;">
+          <div class="card-header px-4 py-5">
+            <h5 class="text-muted mb-0">Ready for PickUp</h5>
+          </div>
+          <div class="card-body p-4">
+            <!-- <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
+              <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
+            </div> -->
+            <% for (let i = 0; i < completedOrders.length; i++) {%>
+              <div class="card shadow-0 border mb-4">
+              <div class="card-body">
 
+                <div class="row">
 
-          <!--Using method override to send a delete request to the server. When somone clicks on the trash icon it tells the server to delete the order from the database-->
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0">Customer: <%= completedOrders[i].customerName%> </p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Size: <br /> <%= completedOrders[i].size%></p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center" id="order" style="width: 10rem">
+                    <p class="text-muted mb-0 small">Order: <br /> <%= completedOrders[i].order%> </p>
+
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center" id="order" style="width: 10rem">
+                    <p class="text-muted mb-0 small">Completed By: <br /> <%= completedOrders[i].barista%> </p>
+
+                  </div>
+                  
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center" id="order" >
+
+   <!--Using method override to send a delete request to the server. When somone clicks on the trash icon it tells the server to delete the order from the database-->
 
           <!--Pass in the ID of the post as a query parameter so we know which post to delete-->
           <form
@@ -64,19 +142,85 @@
           method="POST"
           class="col-3"
         >
-          <button class="btn btn-primary bi bi-trash" type="submit"></button>
+          <button class="btn btn-danger bi bi-trash" type="submit"></button>
         </form>
-          
-        </li>
+
+
+                  </div>
+                 
+                </div>
+
+
+
+              </div>
+            </div>
+            <%}%>
+
+            
+          </div>
+
+        </div>
       </div>
-    <%}%>
-    </ul>
-
-
-
+    </div>
   </div>
 </section>
 
+<% } %>
+
+
+
+                   
+
+  <!-- Footer -->
+
+<footer class="bg-light text-center fixed-bottom">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Form -->
+    <section class="">
+      <form action="">
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center">
+          <!--Grid column-->
+          <div class="col-auto">
+            <p class="pt-2">
+              <strong>Sign up for our newsletter</strong>
+            </p>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-md-5 col-12">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="form5Example27" class="form-control" placeholder="Email address"/>
+            </div>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-auto">
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary mb-4">
+              Subscribe
+            </button>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </form>
+    </section>
+    <!-- Section: Form -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2023 Copyright:
+    <a class="text-dark" target="blank" href="https://elvingarcia.dev/">elvingarcia.dev</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 
 
 <script src="/main.js"></script>

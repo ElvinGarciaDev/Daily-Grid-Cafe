@@ -15,7 +15,7 @@ module.exports = {
       console.log(pendingOrders, completedOrders)
       
       // Send the pending and completed orders to the ejs so we can dynamically create html elements
-      res.render("profile.ejs", { pendingOrders: pendingOrders, completedOrders: completedOrders });
+      res.render("profile.ejs", { pendingOrders: pendingOrders, completedOrders: completedOrders, user: req.user });
 
     } catch (err) {
       console.log(err);
@@ -43,12 +43,17 @@ module.exports = {
 
     console.log(req.body)
 
+    // We're giving the user to select up to two drinks. We beign sent an array to the backend ex: [ 'Iced Cappuccino', 'Hot Chocolate' ]. 
+    // If the user only submits one drink this creates an empty string in the array ex:[ 'Iced Cappuccino', 'Hot Chocolate' ]. We need to remvoe any empty strings before saving the order to the DB 
+    let orderArr = req.body.drink.filter(item => item.length > 0)
+
+
     try {
 
       // Use the Post schema to create a document and save it to mongoDB
       await Post.create({
 
-        order: req.body.type,
+        order: orderArr,
         size: req.body.size,
         customerName: req.body.customerName
       });
